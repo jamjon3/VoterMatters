@@ -50,7 +50,7 @@ sub showMain {
             <BODY>
                 <H4>Hello World</H4>
                 <P>
-                    Your IP Address is $ENV{REMOTE_ADDR}
+                    Your IP Address is $ENV{REMOTE_ADDR} and Home is $ENV{HOME}
                 <P>
                 <div id='content' ></div>
                 <H5>Have a "nice" day</H5>

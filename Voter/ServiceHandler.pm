@@ -5,10 +5,12 @@ use lib qw(.);
 use strict;
 use Switch;
 use Voter::Serializer;
+use Voter::Conx;
 
 sub new {
     my($type) = $_[0];
     my($self) = {};
+    $self->{'conx'} = Voter::Conx->new($_[1]);
     $self->{'serializer'} = Voter::Serializer->new();
     bless($self,$type);
     return($self);

@@ -15,7 +15,7 @@ use Voter::Main;
 sub new {
     my($type) = $_[0];
     my($self) = {};
-    $self->{'serviceHandler'} = Voter::ServiceHandler->new();
+    $self->{'serviceHandler'} = Voter::ServiceHandler->new($_[1]);
     $self->{'main'} = Voter::Main->new();
     #$self->{'cgiUtil'} = new CGI();
     bless($self,$type);
@@ -28,17 +28,7 @@ sub handler : method {
     if(param('service')) {
         $self->{'serviceHandler'}->invokeService($r,param('service'),param('request'));
     } else {
-        #print header,
-        #    start_html("CGI Script"),
-        #    h1("CGI Script"),
-        #    "Not much to see here",
-        #    hr,
-        #    address(a({href=>'/'},"home page"),  
-        #    end_html;        
         $self->{'main'}->showMain($r);
-        
-        
-        
         #$r->content_type('text/html');
         #print "mod_perl 2.0 rocks!\n";        
     }
