@@ -23,7 +23,7 @@ sub resultSet {
     my($self) = shift;
     my($prepVals) = shift || [];
     my($i) = 1;
-    foreach $val (@$prepVals) {
+    foreach my $val (@$prepVals) {
         $self->{'sth'}->bind_param($i,$val);
         $i++;
     }
@@ -34,7 +34,7 @@ sub updateSet {
     my($self) = shift;
     my($prepVals) = shift || [];
     my($i) = 1;
-    foreach $val (@$prepVals) {
+    foreach my $val (@$prepVals) {
         $self->{'sth'}->bind_param($i,$val);
         $i++;
     }
