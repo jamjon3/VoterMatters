@@ -40,6 +40,7 @@ sub testFunction {
     my($self) = $_[0];                  #Find yourself
     my($responseObj) = {};
     $responseObj->{'status'}="success";
+    # $responseObj->{'result'} = $self->{'conx'}->prepare("SELECT * FROM groups")->resultSet();
     return $responseObj;
 }
 

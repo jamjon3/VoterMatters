@@ -3,12 +3,16 @@ package Voter::Conx;
 
 use lib qw(.); 
 use strict;
+# use Apache::DBI;
+use DBI;
 
 sub new {
     my($type) = $_[0];
     my($self) = {};
-    $self->{'dbh'} = $_[1];
     $self->{'sth'} = '';
+    $self->{'dbh'} = '';
+    # $self->{'dbh'} = bless(Apache::DBI->connect());
+    # $self->{'dbh'} = Apache::DBI->connect();
     bless($self,$type);
     return($self);    
 }
@@ -38,7 +42,7 @@ sub updateSet {
         $self->{'sth'}->bind_param($i,$val);
         $i++;
     }
-    $self->{'sth'}->execute();
+    $self->{'sth'}->do();
 }
 
 return(1);
