@@ -1,7 +1,9 @@
 There will be some work to do here. Test from NB
 
-Fedora Packages
+Fedora Packages Required
 
 perl-CGI
 perl-JSON-XS
 perl-Apache-DBI
+
+This app requires a schema which is still getting built out. Starting on the user/group auth to integrating mod_authn_dbd
