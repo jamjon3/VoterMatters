@@ -15,7 +15,6 @@ use Voter::Main;
 sub new {
     my($type) = $_[0];
     my($self) = {};
-    # my $dbh = Apache::DBI->connect();
     $self->{'serviceHandler'} = Voter::ServiceHandler->new($_[1]);
     $self->{'main'} = Voter::Main->new();
     #$self->{'cgiUtil'} = new CGI();

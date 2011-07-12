@@ -3,16 +3,20 @@ package Voter::Conx;
 
 use lib qw(.); 
 use strict;
-# use Apache::DBI;
+use Apache::DBI;
 use DBI;
 
 sub new {
     my($type) = $_[0];
     my($self) = {};
+    $self->{'connect'} = $_[1];
     $self->{'sth'} = '';
-    $self->{'dbh'} = '';
-    # $self->{'dbh'} = bless(Apache::DBI->connect());
-    # $self->{'dbh'} = Apache::DBI->connect();
+    $self->{'dbh'} =  DBI->connect(
+        $self->{'connect'}->{'uri'},
+        $self->{'connect'}->{'user'},
+        $self->{'connect'}->{'password'},
+        $self->{'connect'}->{'options'}
+    );
     bless($self,$type);
     return($self);    
 }
@@ -21,6 +25,7 @@ sub prepare {
     my($self) = shift;
     my($SQL) = shift;
     $self->{'sth'} = $self->{'dbh'}->prepare($SQL);
+    return($self);
 }
 
 sub resultSet {
@@ -31,7 +36,12 @@ sub resultSet {
         $self->{'sth'}->bind_param($i,$val);
         $i++;
     }
-    return $self->{'sth'}->fetchall_hashref();
+    $self->{'sth'}->execute();
+    my(@set);
+    while ( my $ref = $self->{'sth'}->fetchrow_hashref() ) {
+        push(@set,$ref);
+    }
+    return \@set;
 }
 
 sub updateSet {
@@ -42,7 +52,7 @@ sub updateSet {
         $self->{'sth'}->bind_param($i,$val);
         $i++;
     }
-    $self->{'sth'}->do();
+    $self->{'sth'}->execute();
 }
 
 return(1);
