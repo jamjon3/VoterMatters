@@ -55,4 +55,15 @@ sub updateSet {
     $self->{'sth'}->execute();
 }
 
+sub getHandle {
+    my($self) = shift;
+    return $self->{'sth'};
+}
+
+sub setHandle {
+    my($self) = shift;
+    $self->{'sth'} = shift;
+    return($self);
+}
+
 return(1);
