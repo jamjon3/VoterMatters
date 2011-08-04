@@ -6,6 +6,7 @@ use strict;
 use Switch;
 use Voter::Serializer;
 use Voter::Conx;
+use Voter::InlineBulkMailer;
 
 sub new {
     my($type) = $_[0];
@@ -22,6 +23,10 @@ sub invokeService {
     my($serviceName) = $_[2];
     my($request) = $_[3];
     switch ($serviceName) {
+        case "inlineMailer" {
+            $r->content_type('text/json');
+            print $self->{'serializer'}->encode($self->inlineMailerFunction($self->{'serializer'}->decode($request)));
+        }
         case "test" {
             $r->content_type('application/json');
             print $self->{'serializer'}->encode($self->testFunction());
@@ -45,6 +50,12 @@ sub testFunction {
 }
 
 sub testRequestFunction {
+    my($self) = $_[0];                  #Find yourself
+    my($requestObj) = $_[1];
+    my($responseObj) = $requestObj;
+    return $responseObj;
+}
+sub inlineMailerFunction {
     my($self) = $_[0];                  #Find yourself
     my($requestObj) = $_[1];
     my($responseObj) = $requestObj;
