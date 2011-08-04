@@ -8,4 +8,3 @@ perl-Apache-DBI
 
 This app requires a schema which is still getting built out. Starting on the user/group auth to integrating mod_authn_dbd (http://httpd.apache.org/docs/2.2/mod/mod_authn_dbd.html)
 
-More to come
